@@ -1,6 +1,6 @@
-# A Guide to Design Uncertainty-Aware Self-Adaptive Components in Cyber-Physical Systems
+# A Guide to Design Uncertainty-Aware Self-Adaptive Components in Cyber-Physical Systems (draft)
 
-
+This contains the data and the technical report for the systematic review performed over EU projects.
 
 Research Question
 ---------------------------------------------------------------
@@ -41,7 +41,7 @@ Selection Critria
 - robot	
 
 *Criteria 4  (Entities)*
-- # > 2
+- \# > 2
  	 		    
 
 	  	    	        
