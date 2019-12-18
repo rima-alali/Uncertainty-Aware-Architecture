@@ -1,6 +1,6 @@
 # A Guide to Design Uncertainty-Aware Self-Adaptive Components in Cyber-Physical Systems (draft)
 
-This contains the data and the technical report for the systematic review performed over EU projects.
+This guide is part of my thesis. It contains the data and the technical report for the systematic review performed over EU projects.
 
 Research Question
 ---------------------------------------------------------------
