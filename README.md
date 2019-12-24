@@ -4,4 +4,4 @@ This folder contains research related to my thesis that target Uncertainty-Aware
 Systematic Review
 ----------------------------------------------------------
 
-
+The folder contains the data of the study in systematicreviewdata.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects.
