@@ -1,8 +1,8 @@
 # A Guide to Design Uncertainty-Aware Self-Adaptive Components in Cyber-Physical Systems (draft)
 
-This guide is part of my thesis. It contains the data and the technical report for the systematic review performed over EU projects.
+This guide is part of my thesis. It contains the data of the study in systematic_review_data.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects.
 
-Research Question
+Research Questions
 ---------------------------------------------------------------
 - **RQ1:**	What are the typical domains for collective sCPS?
 - **RQ2:**	What are the challenges addressed by collective sCPS?
