@@ -1,4 +1,4 @@
-# A Guide to Design Uncertainty-Aware Self-Adaptive Components in Cyber-Physical Systems (draft)
+# Uncertainty-Aware Self-Adaptive Component Design in Cyber-Physical Systems (draft)
 
 This guide is part of my thesis. It contains the data of the study in systematic_review_data.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects.
 
