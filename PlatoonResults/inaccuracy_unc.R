@@ -17,11 +17,11 @@ v3 <- subset(guard, guard$vehicleID == "Vehicle3")
 
 #speed v1 & v2 & v3
 ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v2$vehSpeedValue)), color = "Vehicle2", ymin = as.numeric(as.character(v2$vehSpeedMin)), ymax = as.numeric(as.character(v2$vehSpeedMax))),
+  geom_smooth(aes(y = as.numeric(as.character(v2$speed)), color = "Vehicle2"),
               stat="identity", fill = "blue", alpha=0.2) +
   geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedValue)), color = "Vehicle2", ymin = as.numeric(as.character(v3$refSpeedMin)), ymax = as.numeric(as.character(v3$refSpeedMax))),
               stat="identity", fill = "blue", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$vehSpeedValue)), color = "Vehicle3", ymin = as.numeric(as.character(v3$vehSpeedMin)), ymax = as.numeric(as.character(v3$vehSpeedMax))),
+  geom_smooth(aes(y = as.numeric(as.character(v3$speed)), color = "Vehicle3"),
               stat="identity", fill = "red", alpha=0.2) +
   scale_color_manual("", breaks = c("Vehicle2", "Vehicle3"),
                      values = c("blue","red")) +
@@ -201,7 +201,7 @@ cond_match <- function(x,y,z){
 
 dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$normalCondition), color = "green" ) +
+  geom_point(aes(y = v3$normalCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("normal")  + xlim(0,7000) + 
   annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = 3, angle = 90) +
@@ -236,7 +236,7 @@ dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 dp1 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$minCondition), color = "green" ) +
+  geom_point(aes(y = v3$minCondition), color = "black", size=0.1 ) +
   xlab("Vehicle3 Position (meter)") + ylab("min")  + xlim(0,7000) +
   annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = 3, angle = 90) +
@@ -271,7 +271,7 @@ dp1 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 dp2 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$statisticalCondition), color = "green" ) +
+  geom_point(aes(y = v3$statisticalCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("lr") + xlim(0,7000) + 
   annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = 3, angle = 90) +
@@ -306,7 +306,7 @@ dp2 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 dp3 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$predictionCondition), color = "green" ) +
+  geom_point(aes(y = v3$predictionCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("lr prediction")  + xlim(0,7000) +
   annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = 3, angle = 90) +
@@ -342,3 +342,4 @@ dp3 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 #grid.arrange(dp, dp1, ncol = 1, nrow = 2)
 
 grid.arrange(dp, dp1, dp2, dp3, ncol = 1, nrow = 4)
+

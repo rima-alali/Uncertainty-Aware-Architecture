@@ -11,8 +11,8 @@ v1 <- subset(guard, guard$vehicleID == "Vehicle1")
 v2 <- subset(guard, guard$vehicleID == "Vehicle2")
 v3 <- subset(guard, guard$vehicleID == "Vehicle3")
 
-#v1 <- v1[-1:-1,]
-#v2 <- v2[-1:-1,]
+v1 <- v1[-1:-1,]
+v2 <- v2[-1:-1,]
 #v3 <- v3[-1:-1,]
 
 
@@ -137,12 +137,12 @@ cond_match <- function(x,y,z){
 
 dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$normalCondition), color = "green" ) +
+  geom_point(aes(y = v3$normalCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("normal")  + xlim(0,7000) 
 
 dp1 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$minCondition), color = "green" ) +
+  geom_point(aes(y = v3$minCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("min")  + xlim(0,7000) 
 
 grid.arrange(dp, dp1, ncol = 1, nrow = 2)

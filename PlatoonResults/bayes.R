@@ -137,25 +137,25 @@ cond_match <- function(x,y,z){
 
 dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$normalCondition), color = "green" ) +
+  geom_point(aes(y = v3$normalCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("normal")  + xlim(0,7000)
 
 
 dp1 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$minCondition), color = "green" ) +
+  geom_point(aes(y = v3$minCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("min")  + xlim(0,7000) 
 
 
 dp2 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$statisticalCondition), color = "green" ) +
+  geom_point(aes(y = v3$statisticalCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("lr") + xlim(0,7000) 
 
 
 dp3 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3$predictionCondition), color = "green" ) +
+  geom_point(aes(y = v3$predictionCondition), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("lr prediction")  + xlim(0,7000) 
 
 
@@ -238,12 +238,12 @@ ggplot(v3corr2, aes(x = as.numeric(as.character(v3corr2$posValue))))+
 
 dpBayes <- ggplot(v3condition, aes(x = as.numeric(as.character(v3condition$posValue))))+
   ylim("","false","true") +
-  geom_point(aes(y = v3condition$value), color = "green" ) +
+  geom_point(aes(y = v3condition$value), color = "black", size=0.1) +
   xlab("Vehicle3 Position (meter)") + ylab("corr")
 
 dpBayesFuture <- ggplot(v3conditionFuture, aes(x = as.numeric(as.character(v3conditionFuture$posValue))))+
   xlab("Vehicle3 Position (meter)") + ylab("corr prediction") + ylim("","false","true") +
-  geom_point(aes(y = v3conditionFuture$value), color = "green" ) 
+  geom_point(aes(y = v3conditionFuture$value), color = "black", size=0.1) 
 
 grid.arrange(dp, dp1, dp2, dp3, dpBayes, dpBayesFuture, 
              ncol = 1, nrow = 6)
