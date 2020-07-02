@@ -16,13 +16,13 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
               stat="identity", fill = "red", alpha=0.2) +
   scale_color_manual("", breaks = c("Vehicle2", "Vehicle3"),
                      values = c("blue","red")) +
-  theme(
+  theme(text = element_text(size=25),
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
     legend.justification = c(1,0))+ 
   guides(color=guide_legend(override.aes=list(fill=NA))) +
-  xlab("Position (meter)") + ylab("Speed (km/h)") +ylim(0,120) + xlim(0,7000)
+  xlab("Position (meter)") + ylab("Speed (km/h)") +ylim(0,120) + xlim(0,7000) 
   
 
 #distance
@@ -37,11 +37,11 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
                      values = c("black", "blue","red")) +
   xlab("Position (meter)") + ylab("Distance (meters)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +
-theme(
+theme(text = element_text(size=25),
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) +ylim(-150,250) + xlim(0,7000)
+    legend.justification = c(1,0)) +ylim(-150,150) + xlim(0,7000)
 
 
 #difference
@@ -82,28 +82,16 @@ fun_mean <- function(x){
 
 
 
-var_list <- c('2' = "Vehicle2",'3' = "Vehicle3")
-
-
-color_match <- function(x){
-  colors <- as.numeric(as.character(x)) 
-  cm <- colors
-  var_color <- c("Vehicle2","Vehicle3")
-  for (i in 1:length(colors)) {
-    cm[i] <- var_color[x[i]-1]
-  }
-  return(cm)
-}
-
-
 ggplot(data = minus, aes(x=Label, y = Difference, group = Label))+ 
-  geom_boxplot(aes(fill="VehicleID3"))+                              #Vehicle3
-  facet_wrap(vars(VehicleID), nrow = 2,labeller = as_labeller(var_list))+
+  geom_boxplot(aes(fill="Vehicle3"))+                              #Vehicle3
+  facet_wrap(vars("Vehicle3"), nrow = 2)+
   stat_summary(fun.y=mean, colour="darkred", geom="point", 
                shape=18, size=3,show.legend = FALSE) + coord_flip()+
   scale_fill_discrete(name = "VehicleID") +
   scale_x_continuous(breaks=c(0, 1, 2),
                      labels=c("Distance", "Difference in Braking Distance", "Braking Distance")) +
-  theme(axis.title.y=element_blank(),
+  theme(text = element_text(size=25),
+        axis.title.y=element_blank(),
         legend.position = "bottom") + 
   ylim(-200,200) + ylab("meters") 
+

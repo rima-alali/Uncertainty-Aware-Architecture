@@ -26,18 +26,12 @@ import cz.cuni.mff.d3s.deeco.modes.DEECoModeGuard;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.api.data.History;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.api.exponitial.ExponentialOperators;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.api.inaccuracy.State;
+import cz.cuni.mff.d3s.jdeeco.uncertainty.api.learning.BayesianOperators;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.api.statistics.StatisticalOperators;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.examples.logger.LoggerFormatter;
 
 public class CACCACCGuard extends DEECoModeGuard {
 
-//	public HashMap<String, TreeMap<Double, Double>> inputsCACC = new HashMap();
-//	public HashMap<String, TreeMap<Double, Double>> inputsACC = new HashMap();
-//	public TreeMap<Double, Double> outputsCACC = new TreeMap<>();
-//	public TreeMap<Double, Double> outputsACC = new TreeMap<>();
-//	public TreeMap<Double, Double> corrCACC = new TreeMap<>();
-//	public TreeMap<Double, Double> corrACC = new TreeMap<>();
-//	public TreeMap<Double, Boolean> condition = new TreeMap<>();
 
 	private static final Logger LOGGER = Logger.getLogger(CACCACCGuard.class.getName());
 
@@ -178,8 +172,17 @@ public class CACCACCGuard extends DEECoModeGuard {
 		Boolean cond2 = StatisticalOperators.below(bdistree, 0.0, 2000);
 		Boolean cond3 = StatisticalOperators.fbelow(bdistree, 0.0, 2000,2000);
 		
-//		TreeMap<Double, Double> corrCACC = BayesianOperators.fcorr(distreeCACC, outsCACC, 5.0, 1000, 0);
-//		TreeMap<Double, Double> corrACC = BayesianOperators.fcorr(distreeACC, outsACC, 7.0, 1000, 0);
+//		int w = 10000;
+//		TreeMap<Double, Double> corrCACC = BayesianOperators.corr(distreeCACC, outsCACC, 5.0, w);
+		
+//		Double c_cacc = 0.0;
+//		if(corrCACC.size() > 0 ) corrCACC.lastEntry().getValue();
+
+
+//		TreeMap<Double, Double> corrACC = BayesianOperators.corr(distreeACC, outsACC, 7.0, w);
+//		Double c_acc = 0.0;
+//		if(corrACC.size() > 0) c_acc = corrACC.lastEntry().getValue();
+
 		Boolean cond4 = false;
 //		System.out.println(distreeCACC.keySet());
 //		if(distreeCACC.get("wifiDistance").size() > 10)

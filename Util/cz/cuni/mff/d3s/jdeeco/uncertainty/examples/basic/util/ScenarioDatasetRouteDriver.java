@@ -45,8 +45,8 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(250.0, 90.0);
 		driverSpeed.put(300.0, 90.0);
 		driverSpeed.put(350.0, 90.0);
-		driverSpeed.put(400.0, 90.0);// Math.PI/12
-		driverSpeed.put(450.0, 90.0);// Math.PI/12
+		driverSpeed.put(400.0, 90.0);
+		driverSpeed.put(450.0, 90.0);
 		driverSpeed.put(500.0, 90.0);
 		driverSpeed.put(550.0, 90.0);
 		driverSpeed.put(600.0, 90.0);
@@ -68,25 +68,25 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(1400.0, 90.0);
 		driverSpeed.put(1450.0, 90.0);
 		driverSpeed.put(1500.0, 90.0);
-		driverSpeed.put(1550.0, 50.0);
+		driverSpeed.put(1550.0, 90.0);
 		driverSpeed.put(1600.0, 90.0);
 		driverSpeed.put(1650.0, 90.0);
 		driverSpeed.put(1700.0, 90.0);
 		driverSpeed.put(1750.0, 100.0);
-		driverSpeed.put(1800.0, 110.0);
+		driverSpeed.put(1800.0, 80.0);
 		driverSpeed.put(1850.0, 100.0);
 		driverSpeed.put(1900.0, 90.0);
 		driverSpeed.put(1950.0, 90.0);
 		driverSpeed.put(2000.0, 90.0);
 		driverSpeed.put(2050.0, 90.0);
 		driverSpeed.put(2100.0, 90.0);
-		driverSpeed.put(2150.0, 50.0);
+		driverSpeed.put(2150.0, 90.0);
 		driverSpeed.put(2200.0, 90.0);
 		driverSpeed.put(2250.0, 90.0);
 		driverSpeed.put(2300.0, 90.0);
 		driverSpeed.put(2350.0, 90.0);
 		driverSpeed.put(2400.0, 90.0);
-		driverSpeed.put(2450.0, 50.0);
+		driverSpeed.put(2450.0, 90.0);
 		driverSpeed.put(2500.0, 90.0);
 		driverSpeed.put(2550.0, 90.0);
 		driverSpeed.put(2600.0, 90.0);
@@ -105,8 +105,8 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(3250.0, 90.0);
 		driverSpeed.put(3300.0, 90.0);
 		driverSpeed.put(3350.0, 90.0);
-		driverSpeed.put(3400.0, 90.0);// Math.PI/12
-		driverSpeed.put(3450.0, 90.0);// Math.PI/12
+		driverSpeed.put(3400.0, 90.0);
+		driverSpeed.put(3450.0, 90.0);
 		driverSpeed.put(3500.0, 90.0);
 		driverSpeed.put(3550.0, 90.0);
 		driverSpeed.put(3600.0, 90.0);
@@ -124,11 +124,11 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(4200.0, 90.0);
 		driverSpeed.put(4250.0, 90.0);
 		driverSpeed.put(4300.0, 90.0);
-		driverSpeed.put(4350.0, 80.0);
-		driverSpeed.put(4400.0, 90.0);
+		driverSpeed.put(4350.0, 90.0);
+		driverSpeed.put(4400.0, 80.0);
 		driverSpeed.put(4450.0, 90.0);
 		driverSpeed.put(4500.0, 90.0);
-		driverSpeed.put(4550.0, 50.0);
+		driverSpeed.put(4550.0, 90.0);
 		driverSpeed.put(4600.0, 90.0);
 		driverSpeed.put(4650.0, 90.0);
 		driverSpeed.put(4700.0, 90.0);
@@ -140,7 +140,7 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(5000.0, 90.0);
 		driverSpeed.put(5050.0, 90.0);
 		driverSpeed.put(5100.0, 100.0);
-		driverSpeed.put(5150.0, 50.0);
+		driverSpeed.put(5150.0, 90.0);
 		driverSpeed.put(5200.0, 90.0);
 		driverSpeed.put(5250.0, 90.0);
 		driverSpeed.put(5300.0, 90.0);
@@ -169,7 +169,7 @@ public class ScenarioDatasetRouteDriver {
 		driverSpeed.put(6450.0, 90.0);
 		driverSpeed.put(6500.0, 90.0);
 		driverSpeed.put(6550.0, 100.0);
-		driverSpeed.put(6600.0, 110.0);
+		driverSpeed.put(6600.0, 80.0);
 		driverSpeed.put(6650.0, 100.0);
 		driverSpeed.put(6700.0, 90.0);
 		driverSpeed.put(6750.0, 90.0);
@@ -347,7 +347,7 @@ public class ScenarioDatasetRouteDriver {
 
 	
 	public Double getDriverBehavior(Double pos) {
-		return driverSpeed.get(pos);
+			return driverSpeed.get(pos);
 	}
 	
 	public Double getTorques(Double speed) {

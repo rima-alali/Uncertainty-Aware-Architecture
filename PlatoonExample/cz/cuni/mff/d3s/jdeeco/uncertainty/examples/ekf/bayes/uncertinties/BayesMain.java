@@ -24,7 +24,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Logger;
 
-import cz.cuni.mff.d3s.jdeeco.uncertainty.examples.ekf.bayes.DataStorage;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.examples.logger.LoggerFormatter;
 
 public class BayesMain {

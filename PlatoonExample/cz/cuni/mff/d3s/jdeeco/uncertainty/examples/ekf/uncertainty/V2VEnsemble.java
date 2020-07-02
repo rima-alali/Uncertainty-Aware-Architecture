@@ -1,5 +1,7 @@
 package cz.cuni.mff.d3s.jdeeco.uncertainty.examples.ekf.uncertainty;
 
+import java.util.Random;
+
 import cz.cuni.mff.d3s.deeco.annotations.Ensemble;
 import cz.cuni.mff.d3s.deeco.annotations.In;
 import cz.cuni.mff.d3s.deeco.annotations.InOut;
@@ -62,6 +64,7 @@ public class V2VEnsemble {
 				|| (vehPos.getData() > 5800 && vehPos.getData() < 5850)
 				|| (vehPos.getData() > 6150 && vehPos.getData() < 6200)
 				|| (vehPos.getData() > 6500 && vehPos.getData() < 6700))) {
+			Random rand = new Random();
 			i -= 1;
 		} else {
 			refPos.value.setData(vehPos.getDataRange());

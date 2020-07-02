@@ -10,7 +10,7 @@ import cz.cuni.mff.d3s.jdeeco.uncertainty.api.exponitial.IntervalModel;
 import cz.cuni.mff.d3s.jdeeco.uncertainty.api.inaccuracy.State;
 
 /**
- * The default is "mode"
+ * The class presents a mean to collect the 
  * 
  * @author Rima Al-Ali (alali@d3s.mff.cuni.cz)
  *

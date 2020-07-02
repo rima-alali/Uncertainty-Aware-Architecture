@@ -1,5 +1,7 @@
 package cz.cuni.mff.d3s.jdeeco.uncertainty.examples.ekf.inaccuracy.uncertainty;
 
+import java.util.Random;
+
 import cz.cuni.mff.d3s.deeco.annotations.Ensemble;
 import cz.cuni.mff.d3s.deeco.annotations.In;
 import cz.cuni.mff.d3s.deeco.annotations.InOut;
@@ -54,7 +56,7 @@ public class V2VEnsemble {
 			@In("member.vehRouteSlopes") LookupTable vehRouteSlopes, @In("member.vehMass") Double vehMass,
 			@In("member.vehLastTime") Double vehLastTime) {
 
-		if (i > expRand && ((vehPos.getData() > 2600 && vehPos.getData() < 2700) 
+		if ( i > expRand && ((vehPos.getData() > 2600 && vehPos.getData() < 2700) 
 				|| (vehPos.getData() > 3000 && vehPos.getData() < 3050) 
 				|| (vehPos.getData() > 3350 && vehPos.getData() < 3400)
 				|| (vehPos.getData() > 4400 && vehPos.getData() < 4450)

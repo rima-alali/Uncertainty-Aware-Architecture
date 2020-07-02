@@ -173,9 +173,12 @@ public class Vehicle extends VehicleRole {
 				refModel.value.updateStatesBoundaries(vehrefSpeed.value, vehrefPos.value);
 			} else {
 				// -------------------- states --------------------
+//				System.err.println("print .............. ");
 				State[] refstates = InaccuracyEvaluation.fstates(refModel.value, 0, SCALE, currentTime);
-				vehrefSpeed.value.updateBounds(refModel.value.refineSpeed(refstates[0].getDataRange()));
-				vehrefPos.value.updateBounds(refModel.value.refinePos(refstates[1].getDataRange()));
+				vehrefSpeed.value.setData(refModel.value.refineSpeed(refstates[0].getDataRange()));
+				vehrefPos.value.setData(refModel.value.refinePos(refstates[1].getDataRange()));
+				vehrefSpeed.value.setValue(refSpeed.getData(), refLastTime);
+				vehrefPos.value.setValue(refPos.getData(), refLastTime);
 				refModel.value.updateStatesBoundaries(vehrefSpeed.value, vehrefPos.value);
 			}
 			refLastTimeUpdate.value = currentTime;
@@ -276,20 +279,17 @@ public class Vehicle extends VehicleRole {
 		 */
 		
 		double finalDesiredDistance = vehDiseredDistance;
-		if(diffbrakingDistance.getMinBound() < vehDiseredDistance && diffbrakingDistance.getInterval() > vehDiseredDistance ) {
+		if(diffbrakingDistance.getMinBound() < vehDiseredDistance && diffbrakingDistance.getInterval() > vehDiseredDistance ) 
 			finalDesiredDistance = diffbrakingDistance.getInterval();			
-		} else if (diffbrakingDistance.getMinBound() < 0) {
-			finalDesiredDistance = Math.abs(diffbrakingDistance.getInterval()) + vehDiseredDistance;
-		} 
-//		else if(diffbrakingDistance.getMaxBound() > brakingDistance.getMinBound()) {
-//			finalDesiredDistance = brakingDistance.getMinBound();
-//		}
+
+		 if (diffbrakingDistance.getMinBound() < 0 ) 
+			finalDesiredDistance = Math.abs(diffbrakingDistance.getMinBound()) + finalDesiredDistance;
 		
 		if (lid == "") {
 			actualPos.value = vehPos.getData();
 			actualSpeed.value = vehSpeed.getData();
 			targetPos.value = vehPos.getData();
-			targetSpeed.value = vehDiseredSpeed;
+			targetSpeed.value =  sc.getDriverBehavior(vehPos.getData());
 		} else {
 			actualPos.value = vehPos.getMaxBound();
 			actualSpeed.value = vehSpeed.getData();

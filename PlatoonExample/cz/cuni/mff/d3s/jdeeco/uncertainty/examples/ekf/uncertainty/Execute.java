@@ -19,7 +19,7 @@ public class Execute {
 		SimulationTimer simulationTimer = new DiscreteEventTimer();
 		/* create main application container */
 		DEECoSimulation simulation = new DEECoSimulation(simulationTimer);
-		simulation.addPlugin(new ModeSwitchingPlugin().withPeriod(250));
+		simulation.addPlugin(new ModeSwitchingPlugin().withPeriod(2000));
 
 		/* create nodes and components */
 		DEECoNode deecoNode = simulation.createNode(1);

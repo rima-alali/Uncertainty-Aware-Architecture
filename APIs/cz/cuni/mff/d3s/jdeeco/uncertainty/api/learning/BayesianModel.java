@@ -190,7 +190,7 @@ public class BayesianModel {
 		TreeMap<Double, Double> lowerbci = getIntervalLowerBounds();
 		TreeMap<Double, Double> uppearbci = getIntervalUpperBounds();
 		TreeMap<Double, Double> centralbci = getIntervalCentralBounds();
-//		System.out.println("inputs "+inputs+" \n outputs "+outputs+" \n interval "+intervals);
+//		System.err.println("inputs "+inputs+" \n outputs "+outputs+" \n interval "+intervals);
 		return getCorrelations(y, w, lowerbci, uppearbci, centralbci, windowCnt, windowSize);
 	}
 
