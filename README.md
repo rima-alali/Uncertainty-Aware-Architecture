@@ -1,5 +1,5 @@
 # Uncertainty-Aware Self-Adaptive Architecture (draft)
-This folder contains research related to my thesis that target Uncertainty-Aware Self-Adaptive CPS. It has a systematic review over EU projects that target smart and collective behavior in CPS. Also, it contains a set of APIs to handle Delays, Noise and Operational Boundaries (e.g. energy peaks). The APIs were presented in simple tests, and applied on Platoon example. 
+This folder contains research related to my thesis that target Uncertainty-Aware Self-Adaptive CPS. It has a systematic review over EU projects that target smart and collective behavior in CPS. Also, it contains a set of APIs to handle Delays, Noise and Violating Operational Boundaries. The APIs were presented in simple tests, and applied on Platoon example. 
 
 Systematic Review
 ----------------------------------------------------------
@@ -26,4 +26,4 @@ We present a simple example of platoon includes 3 vehicles. The operators API ar
 
 Run
 ----------------------------------------------------------
-To run the examples, you need to have JDK 11 and Maven. Please build run: Maven build and then you can execute the examples. 
+To run the examples, you need to have JDK 11 and Maven. Please first execute "Maven build" and then you can run the examples. 
