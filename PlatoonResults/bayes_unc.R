@@ -1,3 +1,19 @@
+#/*******************************************************************************
+#  * Copyright 2015 Charles University in Prague
+#  *  
+#  *  Licensed under the Apache License, Version 2.0 (the "License");
+#  *  you may not use this file except in compliance with the License.
+#  *  You may obtain a copy of the License at
+#  *  
+#  *      http://www.apache.org/licenses/LICENSE-2.0
+#  *  
+#  *  Unless required by applicable law or agreed to in writing, software
+#  *  distributed under the License is distributed on an "AS IS" BASIS,
+#  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  *  See the License for the specific language governing permissions and
+#  *  limitations under the License.
+#  *******************************************************************************/
+
 library(ggplot2)
 library(tidyverse)
 library(gridExtra)
@@ -209,7 +225,7 @@ cond_match <- function(x,y,z){
 
 
 ps <- 0.9
-s<- 7
+s<- 5
 plotfontsize <- 25
 
 dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
@@ -563,7 +579,7 @@ ggplot(v3corr2, aes(x = as.numeric(as.character(v3corr2$posValue))))+
   annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 6500, y = -10, label = "GWRD", color = "grey20", size = s, angle = 90) 
 
-s <- 7
+s <- 5
 dpBayes <- ggplot(v3condition, aes(x = as.numeric(as.character(v3condition$posValue))))+
   ylim("","false","true") +
   theme(text = element_text(size=plotfontsize)) + 

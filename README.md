@@ -7,10 +7,10 @@ Systematic Review
 The folder contains the data of the study in systematicreviewdata.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects.
 
 
-
 APIs
 ----------------------------------------------------------
-We present a set of data types to be used in the APIs, The APIs contains operators help in handling delays using ODE equations, noise using linear regression, and operational boundaries using Bayesian linear regression and correlation.   
+The APIs contains operators help in handling delays using ODE equations, noise using linear regression, and violating operational boundaries using trends of correlations that employee Bayesian linear regression.  
+
 
 Simple Tests
 ----------------------------------------------------------
@@ -22,8 +22,6 @@ Platoon Example
 We present a simple example of platoon includes 3 vehicles. The operators API are used in the mode-switching conditions in each vehicle to evaluate the situation when the vehicle should switch from CACC to ACC.
 
 
-
-
 Run
 ----------------------------------------------------------
-To run the examples, you need to have JDK 11 and Maven. Please first execute "Maven build" and then you can run the examples. 
+To run the examples, you need to have JDK 11 (http://java.com/en/) and Maven (http://maven.apache.org/). Please first execute "Maven build" and then you can run the examples. 
