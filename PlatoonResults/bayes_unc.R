@@ -90,7 +90,7 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 #distance v1 & v2 & v3
 ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceValue)), color = "Distance", ymin = as.numeric(as.character(v3$distanceMin)), ymax = as.numeric(as.character(v3$distanceMax))),
+  geom_smooth(aes(y = as.numeric(as.character(v3$distanceCACCValue)), color = "Distance", ymin = as.numeric(as.character(v3$distanceMin)), ymax = as.numeric(as.character(v3$distanceMax))),
               stat="identity", fill = "blue", alpha=0.2) +
   geom_smooth(aes(y = as.numeric(as.character(v3$diffBrakingDistanceValue)), color = "DiffBrakingDistance", ymin = as.numeric(as.character(v3$diffBrakingDistanceMin)), ymax = as.numeric(as.character(v3$diffBrakingDistanceMax))),
               stat="identity", fill = "black", alpha=0.2) +
@@ -427,17 +427,19 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 #distance
 ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceACCValue)) * 10- as.numeric(as.character(v3$distanceCACCValue)) *10, color = "ACC-CACC"),
+  geom_smooth(aes(y = as.numeric(as.character(v3$distanceCACCValue)), color = "CACC"),
               stat="identity", fill = "blue", alpha=0.2) +
-  scale_color_manual("", breaks = c("ACC-CACC", "ACC"),
-                     values = c("black", "blue")) +
-  xlab("Position (meter)") + ylab("Distance (meters * 10)") +  
+  geom_smooth(aes(y = as.numeric(as.character(v3$distanceACCValue)) , color = "ACC"),
+              stat="identity", fill = "blue", alpha=0.2) +
+  scale_color_manual("", breaks = c("CACC", "ACC"),
+                     values = c("blue", "red")) +
+  xlab("Position (meter)") + ylab("Distance (meters)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +
   theme(text = element_text(size=25),
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) + xlim(0,7000) +
+    legend.justification = c(1,0)) + xlim(1000,7000) +ylim(10,25) +
   annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
   annotate("text", x = 1350, y = -1, label = "R", color = "grey20", size = s, angle = 90) +
   annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
@@ -472,9 +474,11 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
 
 #outputs
 ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$outsCACCValue)) - as.numeric(as.character(v3$outsACCValue)), color = "ACC-CACC"),
+  geom_smooth(aes(y = as.numeric(as.character(v3$outsCACCValue)), color = "CACC"),
               stat="identity", fill = "black", alpha=0.2) +
-  scale_color_manual("", breaks = c("ACC-CACC", "Distance", "SelfBrakingDistance"),
+  geom_smooth(aes(y = as.numeric(as.character(v3$outsACCValue)), color = "ACC"),
+              stat="identity", fill = "black", alpha=0.2) +
+  scale_color_manual("", breaks = c("ACC-CACC", "ACC", "CACC"),
                      values = c("black", "blue","red")) +
   xlab("Position (meter)") + ylab("Distance (meters)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +

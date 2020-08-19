@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This network was created in GeNIe Academic, which can be used for educational and research purposes only -->
+<smile version="1.0" id="Network2" numsamples="10000" discsamples="10000">
+	<nodes>
+		<decision id="Copy_of_Domain">
+			<state id="D1_SmartFactoryAndManufacturing" />
+			<state id="D2_SmartHomesAndBuilding" />
+			<state id="D3_SmartTrafficAndTransport" />
+			<state id="D4_SmartGridsAndEnergy" />
+			<state id="D5_Robotics" />
+			<state id="D6_CrisisAndEmergency" />
+			<state id="D7_Clouds" />
+		</decision>
+		<cpt id="Property">
+			<state id="P1_Safety" />
+			<state id="P2_Performance" />
+			<state id="P3_Price" />
+			<state id="P4_Resilience" />
+			<state id="P5_Cooperation" />
+			<state id="P6_Connectivity" />
+			<parents>Copy_of_Domain</parents>
+			<probabilities>0 0.4 0 0.2 0.2 0.2 0 0.333333333 0.166666667 0.5 0 0 0.166666667 0.5 0.166666667 0.166666667 0 0 0 0.5 0.375 0.125 0 0 0.166666667 0 0 0.333333333 0.333333333 0.166666667 0 0 0 0.4 0.4 0.2 0 0.25 0.25 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="Uncertainty_Type">
+			<state id="U1_Network_and_Delays" />
+			<state id="U2_Missing_Information" />
+			<state id="U3_Noise" />
+			<state id="U4_Violating_Operational_Boundaries" />
+			<state id="U5_Ambiguity_and_Ill_definition" />
+			<state id="U6_Failures" />
+			<state id="U7_Inconsistency" />
+			<state id="U8_Context" />
+			<state id="None" />
+			<parents>Copy_of_Domain Property</parents>
+			<probabilities>0 0 0 0 0 0 0 0 1 0.333333333 0.333333333 0 0 0.333333333 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0.333333333 0.333333333 0 0 0.333333333 0 0 0 0 0 1 0 0 0 0 0 0 0.333333333 0 0.333333333 0 0 0.333333333 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0.333333333 0.333333333 0 0 0.333333333 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0.5 0 0 0 0 0 0.5 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0.5 0 0 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0.111111111 0.111111111 0 0.333333333 0 0 0 0.444444444 0 0 0 0 0.75 0 0 0 0.25 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0.4 0 0.2 0.2 0.2 0 0 0 0 0.4 0 0.4 0 0.2 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0.2 0 0 0.2 0.2 0.4 0 0.2 0.2 0.2 0 0 0.2 0 0.2 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0.25 0.25 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1</probabilities>
+		</cpt>
+		<cpt id="Method">
+			<state id="HU1_DataFilteringAndEstimation" />
+			<state id="HU2_StatisticalAndProbability" />
+			<state id="HU3_Re_Configuration" />
+			<state id="HU4_MachineLearningAndNeuralNetworks" />
+			<state id="HU5_Verification" />
+			<state id="HU6_HumanInTheLoop" />
+			<state id="HU7_DeclarativeProgramming" />
+			<state id="None" />
+			<parents>Copy_of_Domain Property Uncertainty_Type</parents>
+			<probabilities>0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0.5 0 0.5 0 0 0 0 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0.333333333333333 0.3333333333333333 0 0.3333333333333333 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.2 0 0.4 0 0.2 0.2 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0.75 0 0.25 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.66666666666 0 0.333333333 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.4 0.2 0.2 0 0.2 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.2 0 0.4 0 0.2 0.2 0 0 0 0 0 0 0 0 1 0 0 0 0.5 0 0.5 0 0 0 0.33333333 0 0.33333333333 0 0 0.333333333 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0.142857142857 0.2857142857 0.142857142857 0.2857142857 0 0.142857142857 0 0 0 0 0 0 0 0 0 1 0 0.25 0 0.5 0 0.25 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0.5 0.5 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0.333333333 0 0.66666666666 0 0.5 0.5 0 0 0 0 0 0 0.25 0.25 0 0 0.25 0 0.25 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0.5 0 0.5 0 0 0 0 0 0 0 0 1 0 0.5 0 0.5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0 0 0 0.5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0.5 0 0 0 0 0.5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1</probabilities>
+		</cpt>
+		<cpt id="Output">
+			<state id="Estimation_Optimization" />
+			<state id="Classification_Recognition" />
+			<state id="SatisfyProperty_AchieveGoals" />
+			<state id="Prediction_Forecasting" />
+			<state id="ExternalInvolvement" />
+			<parents>Method</parents>
+			<probabilities>1 0 0 0 0 0.3333333333333444 0.3333333333333111 0 0.3333333333333444 0 1 0 0 0 0 0.3333333333333311 0.3333333333333344 0 0.3333333333333344 0 0 0 1 0 0 0 0.3333333333333454 0 0.3333333333333123 0.3333333333333424 0.5 0 0.5 0 0 0.2 0.2 0.2 0.2 0.2</probabilities>
+		</cpt>
+		<utility id="Method_Utility">
+			<parents>Property Uncertainty_Type Method</parents>
+			<utilities>0.142857 0 0 0 0.142857 0 0.142857 0 0.428571 0.428571 0 0.7142849999999999 0.142857 0 0 0.285714 0 0 0 0.7142849999999999 0 0 0 0.142857 0 0.285714 0.7142849999999999 0.142857 0.428571 0.7142849999999999 0.285714 0.7142849999999999 0.142857 0.142857 0.7142849999999999 0 0.428571 0.285714 0.142857 0.285714 0.571428 0.285714 0 0 0 0.285714 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</utilities>
+		</utility>
+		<cpt id="Input">
+			<state id="Observation_data" />
+			<state id="Feedback_data" />
+			<state id="Training_data" />
+			<parents>Method</parents>
+			<probabilities>0.5 0.5 0 1 0 0 1 0 0 0.3333333331333334 0.3333333334333333 0.3333333334333333 1 0 0 1 0 0 1 0 0 0.3333333333333333 0.3333333333333333 0.3333333333333333</probabilities>
+		</cpt>
+		<cpt id="Assumption">
+			<state id="Data" />
+			<state id="Infrastructure" />
+			<state id="System" />
+			<parents>Method</parents>
+			<probabilities>0.3333333333222224 0.3333333333222224 0.3333333333555553 0.5 0 0.5 0.3333333333333333 0.3333333333333333 0.3333333333333333 0.75 0.25 0 0 0 1 0.6 0 0.4 0.5 0 0.5 0.3333333333333333 0.3333333333333333 0.3333333333333333</probabilities>
+		</cpt>
+		<cpt id="Adaptation_Technique">
+			<state id="Parameter" />
+			<state id="Structure" />
+			<state id="Context" />
+			<state id="NONE" />
+			<parents>Property Method</parents>
+			<probabilities>0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0.5 0.5 0 0 0 0 0 1 0.5 0.5 0 0 0.466666667 0.333333333 0.2 0 0 1 0 0 0.444444444 0.555555556 0 0 0 0 0 1 0.5 0.5 0 0 0.333333333 0.666666667 0 0 0 0 0 1 0 0 0 1 0.444444444 0.555555556 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 1 0 0 0.5 0.5 0 0 0 0 0 1 0.6 0.2 0.2 0 0.75 0.25 0 0 0.5 0.25 0.25 0 0.666666667 0.333333333 0 0 0 1 0 0 0.666666667 0.333333333 0 0 0.5 0.5 0 0 0 0 0 1 1 0 0 0 1 0 0 0 0.5 0.5 0 0 1 0 0 0 0.5 0.5 0 0 1 0 0 0 0 1 0 0 0 0 0 1 1 0 0 0 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1</probabilities>
+		</cpt>
+		<cpt id="Autonomy_Degree">
+			<state id="Decentralized" />
+			<state id="Semi_centralized" />
+			<state id="Centralized" />
+			<state id="None" />
+			<parents>Property Method</parents>
+			<probabilities>0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 1 1 0 0 0 0.727272727 0 0.272727273 0 1 0 0 0 0.714285714 0 0.285714286 0 0 0 0 1 0.5 0 0.5 0 1 0 0 0 0 0 0 1 0 0 0 1 0.625 0 0.375 0 0.333333333 0.333333333 0.333333333 0 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0.6 0.2 0.2 0 1 0 0 0 0.5 0.25 0.25 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 1 1 0 0 0 0.333333333 0.333333333 0.333333333 0 1 0 0 0 0.333333333 0.333333333 0.333333333 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1</probabilities>
+		</cpt>
+		<cpt id="Source_of_uncertainty">
+			<state id="Variability_space_of_adaptation" />
+			<state id="Effecting" />
+			<state id="Automatic_Learning" />
+			<state id="Decentralization" />
+			<state id="Changes_in_adaptation_mechanisms" />
+			<state id="Fault_location_and_identification" />
+			<state id="Execution_context" />
+			<state id="Human_in_the_loop" />
+			<state id="Multiple_Ownership" />
+			<state id="Changing_resources" />
+			<parents>Uncertainty_Type</parents>
+			<probabilities>0 0 0 0.5 0 0 0 0 0 0.5 0 0 0.333333333 0 0 0.333333333 0 0 0 0.333333333 0 0 0.25 0 0 0.25 0 0 0.25 0.25 0 0 0.5 0 0 0 0 0 0 0.5 0.333333333 0 0.333333333 0 0 0 0 0 0.333333333 0 0 0.2 0.2 0.2 0.2 0 0 0 0 0.2 0 0 0.333333333 0.333333333 0 0 0 0 0.333333333 0 0 0 0 0.2 0 0.2 0.2 0.2 0 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</probabilities>
+		</cpt>
+		<cpt id="CPS_Part">
+			<state id="Cyber" />
+			<state id="Physical" />
+			<state id="Network" />
+			<state id="Environment" />
+			<state id="none" />
+			<parents>Property Source_of_uncertainty</parents>
+			<probabilities>0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 0 0.5 0.5 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.571428571 0.071428571 0.071428571 0.285714286 0 0.25 0.25 0.25 0.25 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.333333333 0.166666667 0.333333333 0.166666667 0 0 0 0 0 1 0 0 0 0 1 0.666666667 0 0 0.333333333 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0.333333333 0.333333333 0 0.333333333 0 0 0 0 0 1 0.333333333 0.333333333 0 0.333333333 0 0.4 0.4 0 0.2 0 0.333333333 0.333333333 0 0.333333333 0 0 0 0 0 1 0 0 0 0 1 0.25 0.5 0 0.25 0 0 0 0 0 1 0 0 0 0 1 0.333333333 0.166666667 0.166666667 0.333333333 0 0 1 0 0 0 0 0 0 0 1 0.285714286 0.142857143 0.142857143 0.428571429 0 0 0 0 0 1 0.333333333 0.333333333 0 0.333333333 0 0.25 0.25 0.25 0.25 0 0.333333333 0.333333333 0 0.333333333 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0.333333333 0.666666667 0 0</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.2.2601.0 ACADEMIC" name="Network2" faultnameformat="nodestate">
+			<node id="Method_Utility">
+				<name>Method Utility</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>782 163 909 195</position>
+				<barchart width="128" height="66" />
+			</node>
+			<node id="Method">
+				<name>Method</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>494 356 604 419</position>
+				<barchart active="true" width="271" height="162" />
+			</node>
+			<node id="Copy_of_Domain">
+				<name>Domain</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>837 987 962 1032</position>
+				<barchart width="336" height="153" />
+			</node>
+			<node id="Property">
+				<name>Property</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>811 637 907 693</position>
+				<barchart active="true" width="188" height="134" />
+			</node>
+			<node id="Uncertainty_Type">
+				<name>Uncertainty Type</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>996 354 1089 412</position>
+				<barchart active="true" width="270" height="180" />
+			</node>
+			<node id="Output">
+				<name>Output</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>216 359 308 396</position>
+				<barchart active="true" width="208" height="108" />
+			</node>
+			<node id="Input">
+				<name>Input</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>544 140 626 170</position>
+				<barchart active="true" width="169" height="72" />
+			</node>
+			<node id="Assumption">
+				<name>Assumption</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>341 177 457 219</position>
+				<barchart active="true" width="155" height="72" />
+			</node>
+			<node id="Adaptation_Technique">
+				<name>Adaptation Technique</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>181 683 306 732</position>
+				<barchart active="true" width="181" height="90" />
+			</node>
+			<node id="Autonomy_Degree">
+				<name>Autonomy Degree</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>426 591 545 640</position>
+				<barchart active="true" width="196" height="90" />
+			</node>
+			<node id="Source_of_uncertainty">
+				<name>Source of uncertainty</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1305 367 1492 417</position>
+				<barchart active="true" width="252" height="198" />
+			</node>
+			<node id="CPS_Part">
+				<name>CPS Part</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1352 616 1435 660</position>
+				<barchart active="true" width="128" height="108" />
+			</node>
+		</genie>
+	</extensions>
+</smile>

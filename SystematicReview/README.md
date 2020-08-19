@@ -1,6 +1,6 @@
 # Uncertainty-Aware Self-Adaptive Component Design in Cyber-Physical Systems (draft)
 
-This guide is part of my thesis. It contains the data of the study in systematic_review_data.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects.
+This guide is part of my thesis. It contains the data of the study in systematic_review_data.xlsx and the technical report in FullReportReview2019.pdf for the systematic review performed over EU projects. We added a representation of the results as a decision model using Bayesian network and influence diagram (i.e. using GeNIe 2.2).
 
 Research Questions
 ---------------------------------------------------------------
