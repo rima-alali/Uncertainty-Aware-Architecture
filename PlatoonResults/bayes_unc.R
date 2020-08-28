@@ -13,35 +13,84 @@
 #  *  See the License for the specific language governing permissions and
 #  *  limitations under the License.
 #  *******************************************************************************/
+#
+# Author: Rima Al-ALi (alali@d3s.mff.cuni.cz)
+#
 
 library(ggplot2)
-library(tidyverse)
 library(gridExtra)
 
-setwd('C:/Users/rima/Desktop/R_thesis_results')
+#Check the current directory 
+#getwd()
 
-#bayes_unc.csv
-#bayes.csv
-#inaccuracy_unc.csv
-#inaccuracy.csv
-#est_unc.csv
-#est.csv
-#baseline.csv
+#Add a new directory if needed 
+#dir <- #e.g. 'D:/examples'
+#setwd(dir)
+
+
+#Read the data
 guard <- read.csv(file="./bayes_unc.csv",sep=",",head=TRUE)   
-names(guard)
+#Check the names of data columns 
+#names(guard)
 
-v1 <- subset(guard, guard$vehicleID == "Vehicle1")
-v2 <- subset(guard, guard$vehicleID == "Vehicle2")
+#Select the rows of "vehicle3"
 v3 <- subset(guard, guard$vehicleID == "Vehicle3")
 
-#v1 <- v1[-1:-1,]
-#v2 <- v2[-1:-1,]
-#v3 <- v3[-1:-1,]
+##############################################
+##### add uncertainies details to plots ######
+##############################################
 
+
+#Set the size of the uncertianites font on plots
 uncFontSize <- 5
-#speed v1 & v2 & v3
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedValue)), color = "Vehicle2", ymin = as.numeric(as.character(v3$refSpeedMin)), ymax = as.numeric(as.character(v3$refSpeedMax))),
+
+#Define the text to disply the uncertianies on plots
+addUncTextToPlot <- function(g,uncFontStart,uncFontSize){
+  return(g +
+           annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 1350, y = uncFontStart, label = "R", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 1750, y = uncFontStart, label = "D", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 2200, y = uncFontStart, label = "G", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 2600, y = uncFontStart, label = "W", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 3000, y = uncFontStart, label = "GW", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 3350, y = uncFontStart, label = "WR", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 3700, y = uncFontStart, label = "RD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 4050, y = uncFontStart, label = "GD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 4400, y = uncFontStart, label = "WD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 4750, y = uncFontStart, label = "GR", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 5100, y = uncFontStart, label = "GRD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 5450, y = uncFontStart, label = "GWR", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 5800, y = uncFontStart, label = "WRD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 6150, y = uncFontStart, label = "GWD", color = "grey20", size = uncFontSize, angle = 90) +
+           annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
+           annotate("text", x = 6500, y = uncFontStart, label = "GWRD", color = "grey20", size = uncFontSize, angle = 90))
+}
+
+
+
+##############################################
+##### plot speed and distance in vehicle3 ####
+##############################################
+
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- 1
+
+#Plot the speed of the vehicle3 according to its position and plot the belief about the speed of vehicle2 in vehicle3 
+addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+                   geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedValue)), color = "Vehicle2", ymin = as.numeric(as.character(v3$refSpeedMin)), ymax = as.numeric(as.character(v3$refSpeedMax))),
               stat="identity", fill = "blue", alpha=0.2) +
 #  geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedMin)), color = "line"), stat="identity", fill = "blue", alpha=0.2) +
 #  geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedMax)), color = "line"), stat="identity", fill = "blue", alpha=0.2) +
@@ -55,42 +104,14 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
     legend.key = element_rect(colour = "transparent", fill = "white"),
     legend.justification = c(1,0))+ 
   guides(color=guide_legend(override.aes=list(fill=NA))) +
-  xlab("Position (meter)") + ylab("Speed (km/h)") +ylim(0,120) + xlim(0,7000) + 
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = uncFontSize, angle = 90) 
-  
+  xlab("Position (meter)") + ylab("Speed (km/h)") +ylim(0,120) + xlim(0,7000) , uncFontStart, uncFontSize) 
 
-#distance v1 & v2 & v3
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceCACCValue)), color = "Distance", ymin = as.numeric(as.character(v3$distanceMin)), ymax = as.numeric(as.character(v3$distanceMax))),
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- -150
+
+#Plot the distance of the vehicle3 according to its position and plot the belief about the distance of vehicle2 in vehicle3
+addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+  geom_smooth(aes(y = as.numeric(as.character(v3$distanceCACCValue)), color = "Distance"),
               stat="identity", fill = "blue", alpha=0.2) +
   geom_smooth(aes(y = as.numeric(as.character(v3$diffBrakingDistanceValue)), color = "DiffBrakingDistance", ymin = as.numeric(as.character(v3$diffBrakingDistanceMin)), ymax = as.numeric(as.character(v3$diffBrakingDistanceMax))),
               stat="identity", fill = "black", alpha=0.2) +
@@ -104,284 +125,118 @@ theme(text = element_text(size=25),
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) +ylim(-150,150) + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = -150, label = "R", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = -150, label = "D", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = -150, label = "G", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = -150, label = "W", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = -150, label = "GW", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = -150, label = "WR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = -150, label = "RD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = -150, label = "GD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = -150, label = "WD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = -150, label = "GR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = -150, label = "GRD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = -150, label = "GWR", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = -150, label = "WRD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = -150, label = "GWD", color = "grey20", size = uncFontSize, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = -150, label = "GWRD", color = "grey20", size = uncFontSize, angle = 90) 
+    legend.justification = c(1,0)) +ylim(-150,150) + xlim(0,7000) , uncFontStart, uncFontSize)
 
 
 
 
-data_summary <- function(x) {
-  m <- mean(x)
-  ymin <- m-sd(x)
-  ymax <- m+sd(x)
-  return(c(y=m,ymin=ymin,ymax=ymax))
-}
+#################################
+##### plot minimum distances ####
+#################################
 
+#Match the names to the enumaration 
 v_name <- c('Vehicle1'=1, 'Vehicle2'=2,'Vehicle3'=3)
 
-
-diff <- as.numeric(as.character(v3$distanceMin))
+#Extract the minimum distance
+distmin <- as.numeric(as.character(v3$distanceMin))
 ids <- v3$vehicleID
 lab <- 0
-minus1<- cbind(ids,diff,lab)
-
-diff <- as.numeric(as.character(v3$diffBrakingDistanceMin))
+dist1<- cbind(ids,distmin,lab)
+#Extract the minimum difference between braking distances of vehicle3 and vehicle2
+distmin <- as.numeric(as.character(v3$diffBrakingDistanceMin))
 ids <- v3$vehicleID
 lab <- 1
-minus3<- cbind(ids,diff,lab)
-
-
-diff <- as.numeric(as.character(v3$brakingDistanceMin))
+dist2<- cbind(ids,distmin,lab)
+#Extract the minimum braking distance for vehicle3
+distmin <- as.numeric(as.character(v3$brakingDistanceMin))
 ids <- v3$vehicleID
 lab <- 2
-minus5<- cbind(ids,diff,lab)
+dist3<- cbind(ids,distmin,lab)
+#Add the minimum distances
+distmins<- rbind(dist1, dist2, dist3)
+#Create a data frame with the minimum distances
+distmins <- data.frame(VehicleID = distmins[,1], Difference = distmins[,2], Label = distmins[,3])
 
-minus<- rbind(minus1, minus3, minus5)
-
-minus <- data.frame(VehicleID = minus[,1], Difference = minus[,2], Label = minus[,3])
-
-#ggplot(minus, aes(minus$VehicleID, minus$Difference, group=minus$VehicleID)) + 
-#  geom_violin() + stat_summary(fun.data=data_summary) + xlab("VehicleID") + ylab("Distance Difference (meter)") 
-
-fun_mean <- function(x){
-  return(data.frame(y=mean(x),label=mean(x,na.rm=T)))}
-
-
-
-
+#Display the id of the Vehicle on th plot 
 var_list <- c('2' = "Vehicle2",'3' = "Vehicle3")
-
-
-color_match <- function(x){
-  colors <- as.numeric(as.character(x)) 
-  cm <- colors
-  var_color <- c("Vehicle2","Vehicle3")
-  for (i in 1:length(colors)) {
-    cm[i] <- var_color[x[i]-1]
+var_match <- function(x){
+  vars <- as.numeric(as.character(x)) 
+  cm <- vars
+  var <- c("Vehicle2","Vehicle3")
+  for (i in 1:length(vars)) {
+    cm[i] <- var[x[i]-1]
   }
   return(cm)
 }
 
-
-ggplot(data = minus, aes(x=Label, y = Difference, group = Label))+ 
-  geom_boxplot(aes(fill=color_match(minus$VehicleID)))+                              #Vehicle3
+#Plot the minimum distances
+ggplot(data = distmins, aes(x=Label, y = Difference, group = Label))+ 
+  geom_boxplot(aes(fill=var_match(VehicleID)))+                              #Vehicle3
   facet_wrap(vars(VehicleID), nrow = 2,labeller = as_labeller(var_list))+
   stat_summary(fun.y=mean, colour="darkred", geom="point", 
                shape=18, size=3,show.legend = FALSE) + coord_flip()+
   scale_fill_discrete(name = "VehicleID") +
   scale_x_continuous(breaks=c(0, 1, 2),
-                   labels=c("Distance", "Difference in Braking Distance", "Braking Distance")) +
+                     labels=c("Distance", "Difference in Braking Distance", "Braking Distance")) +
   theme(text = element_text(size=25),
         axis.title.y=element_blank(),
-    legend.position = "bottom") + 
+        legend.position = "bottom") + 
   ylim(-200,200) + ylab("meters") 
 
 
+#####################################
+##### plot conditions evaluation ####
+#####################################
 
-cond_elem <- function(x,y,z){
-  cond <- FALSE
-  if(x < z || y <= 0)
-    cond <- TRUE
-  return(cond)
-}
+#Set the font on the plot
+plotFontSize <- 0.9
+#Reset the size of the uncertianites font on plots
+uncFontSize <- 7
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- 1
 
- 
-cond_match <- function(x,y,z){
-  cm <- x
-  for (i in 1:length(x)) {
-    cm[i] <- cond_elem[x[i],y[i],z]
-  }
-  return(cm)
-}
+#Plot the normal condition evaluation 
+normalCondition <- addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+                                      ylim("","false","true") +
+                                      theme(text = element_text(size=25))+
+                                      geom_point(aes(y = tolower(v3$normalCondition)), color = "black", size=plotFontSize) +
+                                      xlab("Vehicle3 Position (meter)") + ylab("normal")  + xlim(0,7000), uncFontStart, uncFontSize)
 
+#Plot the condition evaluation which is based on minimum values 
+minCondition <- addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+                                   ylim("","false","true") +
+                                   theme(text = element_text(size=25))+
+                                   geom_point(aes(y = tolower(v3$minCondition)), color = "black", size=plotFontSize) +
+                                   xlab("Vehicle3 Position (meter)") + ylab("min")  + xlim(0,7000) , uncFontStart, uncFontSize)
 
-ps <- 0.9
-s<- 5
-plotfontsize <- 25
+#Plot the condition evaluation which is based on statistical testing 
+statisticalCondition <- addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+                                           ylim("","false","true") +
+                                           theme(text = element_text(size=25)) +
+                                           geom_point(aes(y = tolower(v3$statisticalCondition)), color = "black", size=plotFontSize) +
+                                           xlab("Vehicle3 Position (meter)") + ylab("lr") + xlim(0,7000) , uncFontStart, uncFontSize)
 
-dp <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  ylim("","false","true") +
-  theme(text = element_text(size=plotfontsize)) +
-  geom_point(aes(y =  tolower(v3$normalCondition)), color = "black", size=ps) +
-  xlab("Vehicle3 Position (meter)") + ylab("normal")  + xlim(0,7000) + 
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
+#Plot the condition evaluation which is based on statistical testing, and future prediction based on linear regression 
+predictionCondition <- addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+                                          ylim("","false","true") +
+                                          theme(text = element_text(size=25)) +
+                                          geom_point(aes(y = tolower(v3$predictionCondition)), color = "black", size=plotFontSize) +
+                                          xlab("Vehicle3 Position (meter)") + ylab("lr prediction")  + xlim(0,7000) , uncFontStart, uncFontSize)
 
-dp1 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  ylim("","false","true") +
-  theme(text = element_text(size=plotfontsize)) +
-  geom_point(aes(y = tolower(v3$minCondition)), color = "black", size=ps) +
-  xlab("Vehicle3 Position (meter)") + ylab("min")  + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
-
-dp2 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  ylim("","false","true") +
-  theme(text = element_text(size=plotfontsize)) +
-  geom_point(aes(y = tolower(v3$statisticalCondition)), color = "black", size=ps) +
-  xlab("Vehicle3 Position (meter)") + ylab("lr") + xlim(0,7000) + 
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
-
-dp3 <- ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  ylim("","false","true") +
-  theme(text = element_text(size=plotfontsize)) +
-  geom_point(aes(y = tolower(v3$predictionCondition)), color = "black", size=ps) +
-  xlab("Vehicle3 Position (meter)") + ylab("lr prediction")  + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
-
-#grid.arrange(dp, dp1, ncol = 1, nrow = 2)
-
-grid.arrange(dp, dp1, dp2, dp3, ncol = 1, nrow = 4)
+#Plot the evaluations of all conditions in one grid
+grid.arrange(normalCondition, minCondition, statisticalCondition, predictionCondition, ncol = 1, nrow = 4)
 
 
+#####################################
+########### the bayes part ##########
+#####################################
 
-# ------------------ the bayes part ------------------------------
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- -3
 
-#speed
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+
+#Plot the difference in ACC and CACC speed of the vehicle3 according to its position
+addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
   geom_smooth(aes(y = as.numeric(as.character(v3$speedACCValue)) - as.numeric(as.character(v3$speedCACCValue)), color = "ACC-CACC"),
               stat="identity", fill = "blue", alpha=0.2) +
   scale_color_manual("", breaks = c("ACC-CACC", "ACC"),
@@ -392,93 +247,33 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = -3, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = -3, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = -3, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = -3, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = -3, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = -3, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = -3, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = -3, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = -3, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = -3, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = -3, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = -3, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = -3, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = -3, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = -3, label = "GWRD", color = "grey20", size = s, angle = 90) 
+    legend.justification = c(1,0)) + xlim(0,7000) , uncFontStart, uncFontSize)
 
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- -1
 
-#distance
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceCACCValue)), color = "CACC"),
+#Plot the difference in ACC and CACC distance of the vehicle3 according to its position
+addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+  geom_smooth(aes(y = as.numeric(as.character(v3$distanceACCValue)) * 10- as.numeric(as.character(v3$distanceCACCValue)) *10, color = "ACC-CACC"),
               stat="identity", fill = "blue", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceACCValue)) , color = "ACC"),
-              stat="identity", fill = "blue", alpha=0.2) +
-  scale_color_manual("", breaks = c("CACC", "ACC"),
-                     values = c("blue", "red")) +
-  xlab("Position (meter)") + ylab("Distance (meters)") +  
+  scale_color_manual("", breaks = c("ACC-CACC", "ACC"),
+                     values = c("black", "blue")) +
+  xlab("Position (meter)") + ylab("Distance (meters * 10)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +
   theme(text = element_text(size=25),
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) + xlim(1000,7000) +ylim(10,25) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = -1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = -1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = -1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = -1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = -1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = -1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = -1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = -1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = -1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = -1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = -1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = -1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = -1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = -1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = -1, label = "GWRD", color = "grey20", size = s, angle = 90) 
+    legend.justification = c(1,0)) + xlim(0,7000), uncFontStart, uncFontSize)
 
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- -5
 
-#outputs
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$outsCACCValue)), color = "CACC"),
+#Plot the difference in ACC and CACC accerlration/outputs of the vehicle3 according to its position
+addUncTextToPlot(ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
+  geom_smooth(aes(y = as.numeric(as.character(v3$outsCACCValue)) - as.numeric(as.character(v3$outsACCValue)), color = "ACC-CACC"),
               stat="identity", fill = "black", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$outsACCValue)), color = "ACC"),
-              stat="identity", fill = "black", alpha=0.2) +
-  scale_color_manual("", breaks = c("ACC-CACC", "ACC", "CACC"),
+  scale_color_manual("", breaks = c("ACC-CACC", "Distance", "SelfBrakingDistance"),
                      values = c("black", "blue","red")) +
   xlab("Position (meter)") + ylab("Distance (meters)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +
@@ -486,59 +281,35 @@ ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = -5, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = -5, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = -5, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = -5, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = -5, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = -5, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = -5, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = -5, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = -5, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = -5, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = -5, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = -5, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = -5, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = -5, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = -5, label = "GWRD", color = "grey20", size = s, angle = 90)
+    legend.justification = c(1,0)) + xlim(0,7000), uncFontStart, uncFontSize)
 
 
 
+#####################################
+########### correlations ############
+#####################################
 
-
-
-
-
-
-
+#Read the correaltions data
 guardcorr <- read.csv(file="./bayes_corr_unc.csv",sep=",",head=TRUE)   
 
+#Get the vehicle3 data in mode CACC
 v3corr1 <- subset(guardcorr, guardcorr$vehicleID == "Vehicle3" & guardcorr$state == "CACC" )
+#Get the vehicle3 data in mode ACC
 v3corr2 <- subset(guardcorr, guardcorr$vehicleID == "Vehicle3"& guardcorr$state == "ACC")
+#Get the vehicle3 condition evaluation 
 v3condition <- subset(guardcorr, guardcorr$vehicleID == "Vehicle3" & guardcorr$state == "Condition")
+#Get the vehicle3 condition with prediction evaluation 
 v3conditionFuture <- subset(guardcorr, guardcorr$vehicleID == "Vehicle3" & guardcorr$state == "ConditionFuture")
 
-#v3corr1 <- v3corr1[-1:-1,]
-#v3corr2 <- v3corr2[-1:-1,]
-#v3condition <- v3condition[-1:-1,]
-s <- 5
-ggplot(v3corr2, aes(x = as.numeric(as.character(v3corr2$posValue))))+
+
+#Set the font on the plot
+plotFontSize <- 0.9
+#Reset the size of the uncertianites font on plots
+uncFontSize <- 5
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- -10
+
+addUncTextToPlot(ggplot(v3corr2, aes(x = as.numeric(as.character(v3corr2$posValue))))+
   geom_smooth(aes(y = as.numeric(as.character(v3corr2$value))*1000000000 , color = "ACC"),
               stat="identity", fill = "black", alpha=0.2) +
   geom_line(aes(y = as.numeric(as.character(v3corr1$value))*1000000000, color = "CACC"),
@@ -551,111 +322,34 @@ ggplot(v3corr2, aes(x = as.numeric(as.character(v3corr2$posValue))))+
     # Change legend background color
     legend.position = "bottom",
     legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) + xlim(0,7000) +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = -10, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = -10, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = -10, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = -10, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = -10, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = -10, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = -10, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = -10, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = -10, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = -10, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = -10, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = -10, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = -10, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = -10, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = -10, label = "GWRD", color = "grey20", size = s, angle = 90) 
+    legend.justification = c(1,0)) + xlim(0,7000) , uncFontStart, uncFontSize)
 
-s <- 5
-dpBayes <- ggplot(v3condition, aes(x = as.numeric(as.character(v3condition$posValue))))+
+
+
+#######################################################
+##### plot conditions evaluation with correlations ####
+#######################################################
+
+#Set the font on the plot
+plotFontSize <- 0.9
+#Reset the size of the uncertianites font on plots
+uncFontSize <- 7
+#Set the start of the uncertianies text on plot on y axis
+uncFontStart <- 1
+
+corrCondition <- addUncTextToPlot(ggplot(v3condition, aes(x = as.numeric(as.character(v3condition$posValue))))+
   ylim("","false","true") +
-  theme(text = element_text(size=plotfontsize)) + 
-  geom_point(aes(y = tolower(v3condition$value)), color = "black", size=ps) +
-  xlab("Vehicle3 Position (meter)") + ylab("corr") +
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
-
-dpBayesFuture <- ggplot(v3conditionFuture, aes(x = as.numeric(as.character(v3conditionFuture$posValue))))+
-  xlab("Vehicle3 Position (meter)") + ylab("corr prediction") + ylim("","false","true") +
-  geom_point(aes(y = tolower(v3conditionFuture$value)), color = "black", size=ps) +
-  theme(text = element_text(size=plotfontsize)) + 
-  annotate("rect", xmin=c(1350), xmax=c(1450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1350, y = 1, label = "R", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(1750), xmax=c(1900), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 1750, y = 1, label = "D", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2200), xmax=c(2300), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2200, y = 1, label = "G", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(2600), xmax=c(2700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 2600, y = 1, label = "W", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3000), xmax=c(3050), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3000, y = 1, label = "GW", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3350), xmax=c(3400), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3350, y = 1, label = "WR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(3700), xmax=c(3750), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 3700, y = 1, label = "RD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4050), xmax=c(4100), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4050, y = 1, label = "GD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4400), xmax=c(4450), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4400, y = 1, label = "WD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(4750), xmax=c(4800), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 4750, y = 1, label = "GR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5100), xmax=c(5150), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5100, y = 1, label = "GRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5450), xmax=c(5500), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5450, y = 1, label = "GWR", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(5800), xmax=c(5850), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 5800, y = 1, label = "WRD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6150), xmax=c(6200), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6150, y = 1, label = "GWD", color = "grey20", size = s, angle = 90) +
-  annotate("rect", xmin=c(6500), xmax=c(6700), ymin= -Inf , ymax= Inf, alpha=0.2, fill="lightgray") + 
-  annotate("text", x = 6500, y = 1, label = "GWRD", color = "grey20", size = s, angle = 90)
+  geom_point(aes(y = tolower(v3condition$value)), color = "black", size=plotFontSize) +
+  theme(text = element_text(size=25)) + 
+  xlab("Vehicle3 Position (meter)") + ylab("corr") , uncFontStart, uncFontSize)
 
 
-grid.arrange(dp, dp1, dp2, dp3, dpBayes, dpBayesFuture, 
-             ncol = 1, nrow = 6)
+corrFutureCondition <- addUncTextToPlot(ggplot(v3conditionFuture, aes(x = as.numeric(as.character(v3conditionFuture$posValue))))+
+  ylim("","false","true") +
+  geom_point(aes(y = tolower(v3conditionFuture$value)), color = "black", size=plotFontSize) +
+  theme(text = element_text(size=25))  + 
+  xlab("Vehicle3 Position (meter)") + ylab("corr prediction"), uncFontStart, uncFontSize)
+
+#Plot the evaluations of all conditions in one grid
+grid.arrange(normalCondition, minCondition, statisticalCondition, predictionCondition,corrCondition, corrFutureCondition, ncol = 1, nrow = 6)
 

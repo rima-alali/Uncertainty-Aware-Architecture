@@ -13,92 +13,101 @@
 #  *  See the License for the specific language governing permissions and
 #  *  limitations under the License.
 #  *******************************************************************************/
+#
+# Author: Rima Al-ALi (alali@d3s.mff.cuni.cz)
+#
 
 library(ggplot2)
 
-setwd('C:/Users/rima/Desktop/R_thesis_results')
+#Check the current directory 
+#getwd()
 
+#Add a new directory if needed 
+#dir <- #e.g. 'D:/examples'
+#setwd(dir)
+
+
+#Read the data
 guard <- read.csv(file="./baseline.csv",sep=",",head=TRUE)   
-names(guard)
 
+#Check the names of data columns 
+#names(guard)
+
+#Select the rows of "vehicle3"
 v3 <- subset(guard, guard$vehicleID == "Vehicle3")
 
 
-#speed
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$refSpeedValue)), color = "Vehicle2", ymin = as.numeric(as.character(v3$refSpeedMin)), ymax = as.numeric(as.character(v3$refSpeedMax))),
+
+##############################################
+##### plot speed and distance in vehicle3 ####
+##############################################
+
+
+#Plot the speed of the vehicle3 according to its position and plot the belief about the speed of vehicle2 in vehicle3 
+ggplot(v3, aes(x = as.numeric(as.character(vehPosValue))))+
+  geom_smooth(aes(y = as.numeric(as.character(refSpeedValue)), color = "Vehicle2"),
               stat="identity", fill = "blue", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$vehSpeedValue)), color = "Vehicle3", ymin = as.numeric(as.character(v3$vehSpeedMin)), ymax = as.numeric(as.character(v3$vehSpeedMax))),
+  geom_smooth(aes(y = as.numeric(as.character(vehSpeedValue)), color = "Vehicle3"),
               stat="identity", fill = "red", alpha=0.2) +
   scale_color_manual("", breaks = c("Vehicle2", "Vehicle3"),
                      values = c("blue","red")) +
   theme(text = element_text(size=25),
-    # Change legend background color
-    legend.position = "bottom",
-    legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0))+ 
+        # Change legend background color
+        legend.position = "bottom",
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.justification = c(1,0))+ 
   guides(color=guide_legend(override.aes=list(fill=NA))) +
   xlab("Position (meter)") + ylab("Speed (km/h)") +ylim(0,120) + xlim(0,7000) 
-  
 
-#distance
-ggplot(v3, aes(x = as.numeric(as.character(v3$vehPosValue))))+
-  geom_smooth(aes(y = as.numeric(as.character(v3$distanceValue)), color = "Distance", ymin = as.numeric(as.character(v3$distanceMin)), ymax = as.numeric(as.character(v3$distanceMax))),
+
+#Plot the distance of the vehicle3 according to its position and plot the belief about the distance of vehicle2 in vehicle3
+ggplot(v3, aes(x = as.numeric(as.character(vehPosValue))))+
+  geom_smooth(aes(y = as.numeric(as.character(distanceValue)), color = "Distance"),
               stat="identity", fill = "blue", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$diffBrakingDistanceValue)), color = "DiffBrakingDistance", ymin = as.numeric(as.character(v3$diffBrakingDistanceMin)), ymax = as.numeric(as.character(v3$diffBrakingDistanceMax))),
+  geom_smooth(aes(y = as.numeric(as.character(diffBrakingDistanceValue)), color = "DiffBrakingDistance"),
               stat="identity", fill = "black", alpha=0.2) +
-  geom_smooth(aes(y = as.numeric(as.character(v3$brakingDistanceValue)), color = "SelfBrakingDistance", ymin = as.numeric(as.character(v3$brakingDistanceMin)), ymax = as.numeric(as.character(v3$brakingDistanceMax))),
+  geom_smooth(aes(y = as.numeric(as.character(brakingDistanceValue)), color = "SelfBrakingDistance"),
               stat="identity", fill = "red", alpha=0.2) +
   scale_color_manual("", breaks = c("DiffBrakingDistance", "Distance", "SelfBrakingDistance"),
                      values = c("black", "blue","red")) +
   xlab("Position (meter)") + ylab("Distance (meters)") +  
   guides(color=guide_legend(override.aes=list(fill=NA))) +
-theme(text = element_text(size=25),
-    # Change legend background color
-    legend.position = "bottom",
-    legend.key = element_rect(colour = "transparent", fill = "white"),
-    legend.justification = c(1,0)) +ylim(-150,150) + xlim(0,7000)
+  theme(text = element_text(size=25),
+        # Change legend background color
+        legend.position = "bottom",
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.justification = c(1,0)) +ylim(-150,150) + xlim(0,7000)
 
 
-#difference
-data_summary <- function(x) {
-  m <- mean(x)
-  ymin <- m-sd(x)
-  ymax <- m+sd(x)
-  return(c(y=m,ymin=ymin,ymax=ymax))
-}
+#################################
+##### plot minimum distances ####
+#################################
 
+#Match the names to the enumaration 
 v_name <- c('Vehicle1'=1, 'Vehicle2'=2,'Vehicle3'=3)
 
-
-diff <- as.numeric(as.character(v3$distanceMin))
+#Extract the minimum distance
+distmin <- as.numeric(as.character(v3$distanceMin))
 ids <- v3$vehicleID
 lab <- 0
-minus1<- cbind(ids,diff,lab)
-
-diff <- as.numeric(as.character(v3$diffBrakingDistanceMin))
+dist1<- cbind(ids,distmin,lab)
+#Extract the minimum difference between braking distances of vehicle3 and vehicle2
+distmin <- as.numeric(as.character(v3$diffBrakingDistanceMin))
 ids <- v3$vehicleID
 lab <- 1
-minus3<- cbind(ids,diff,lab)
-
-
-diff <- as.numeric(as.character(v3$brakingDistanceMin))
+dist2<- cbind(ids,distmin,lab)
+#Extract the minimum braking distance for vehicle3
+distmin <- as.numeric(as.character(v3$brakingDistanceMin))
 ids <- v3$vehicleID
 lab <- 2
-minus5<- cbind(ids,diff,lab)
+dist3<- cbind(ids,distmin,lab)
+#Add the minimum distances
+distmins<- rbind(dist1, dist2, dist3)
+#Create a data frame with the minimum distances
+distmins <- data.frame(VehicleID = distmins[,1], Difference = distmins[,2], Label = distmins[,3])
 
-minus<- rbind(minus1, minus3, minus5)
-
-minus <- data.frame(VehicleID = minus[,1], Difference = minus[,2], Label = minus[,3])
-
-
-fun_mean <- function(x){
-  return(data.frame(y=mean(x),label=mean(x,na.rm=T)))}
-
-
-
-
-ggplot(data = minus, aes(x=Label, y = Difference, group = Label))+ 
+#Plot the minimum distances
+ggplot(data = distmins, aes(x=Label, y = Difference, group = Label))+ 
   geom_boxplot(aes(fill="Vehicle3"))+                              #Vehicle3
   facet_wrap(vars("Vehicle3"), nrow = 2)+
   stat_summary(fun.y=mean, colour="darkred", geom="point", 
